@@ -1,6 +1,5 @@
 from discord.ext import commands
 import discord
-import csv
 import random
 import urllib
 
@@ -9,11 +8,10 @@ class insultCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.insults = []
-        with open("src/insults.csv", "r") as insultList:
-            insultReader = csv.reader(insultList, delimiter=',')
-            for row in insultReader:
-                for column in row:
-                    self.insults.append(column)
+        data = urllib.request.urlopen("https://pr0x1mas.github.io/InsultBot/src/insults.csv")
+        for line in data:
+            self.insults.append(line.decode("utf-8"))
+            print(line.decode("utf-8"))
         
 
 
@@ -28,12 +26,13 @@ class insultCommands(commands.Cog):
 
     @commands.command()
     async def reload(self, ctx):
-        self.insults = []
-        data = urllib.request.urlopen("https://pr0x1mas.github.io/InsultBot/src/insults.csv")
-        for line in data:
-            self.insults.append(line.decode("utf-8"))
-            await ctx.send("loaded: " + line.decode("utf-8"))
-        await ctx.send("insults reloaded")
+        await ctx.send("reloading insults...")
+        async with ctx.typing():
+            self.insults = []
+            data = urllib.request.urlopen("https://pr0x1mas.github.io/InsultBot/src/insults.csv")
+            for line in data:
+                self.insults.append(line.decode("utf-8"))
+            await ctx.send("insults reloaded")
 
 def setup(bot):
     bot.add_cog(insultCommands(bot))
