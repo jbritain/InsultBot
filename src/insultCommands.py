@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord
 import csv
 import random
+import urllib
 
 class insultCommands(commands.Cog):
 
@@ -24,6 +25,15 @@ class insultCommands(commands.Cog):
             await ctx.send(random.choice(self.insults).replace("?1", ctx.author.mention).replace("?2", self.bot.user.mention))
         else:
             await ctx.send(random.choice(self.insults).replace("?1", person).replace("?2", ctx.author.mention))
+
+    @commands.command()
+    async def reload(self, ctx):
+        self.insults = []
+        data = urllib.request.urlopen("https://pr0x1mas.github.io/InsultBot/src/insults.csv")
+        for line in data:
+            self.insults.append(line.decode("utf-8"))
+            await ctx.send("loaded: " + line.decode("utf-8"))
+        await ctx.send("insults reloaded")
 
 def setup(bot):
     bot.add_cog(insultCommands(bot))
