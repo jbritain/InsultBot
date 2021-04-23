@@ -32,6 +32,7 @@ class insultCommands(commands.Cog):
             data = urllib.request.urlopen("https://pr0x1mas.github.io/InsultBot/src/insults.csv")
             for line in data:
                 self.insults.append(line.decode("utf-8"))
+                print("loaded insult " + line.decode("utf-8"))
             await ctx.send("insults reloaded")
 
 def setup(bot):
