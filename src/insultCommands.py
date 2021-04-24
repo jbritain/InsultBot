@@ -8,7 +8,7 @@ class insultCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.insults = []
-        data = urllib.request.urlopen("https://pr0x1mas.github.io/InsultBot/src/insults.csv") # get insults from online list
+        data = urllib.request.urlopen("https://raw.githack.com/Pr0x1mas/InsultBot/main/src/insults.csv") # get insults from online list
         for line in data:
             self.insults.append(line.decode("utf-8"))
             print(line.decode("utf-8")) # print all insults
@@ -30,7 +30,7 @@ class insultCommands(commands.Cog):
         await ctx.send("reloading insults...")
         async with ctx.typing():
             self.insults = []
-            data = urllib.request.urlopen("https://pr0x1mas.github.io/InsultBot/src/insults.csv") # get insults from online list
+            data = urllib.request.urlopen("https://raw.githack.com/Pr0x1mas/InsultBot/main/src/insults.csv") # get insults from online list
             i = 0
             for line in data:
                 self.insults.append(line.decode("utf-8"))
