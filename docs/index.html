@@ -5,13 +5,101 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body>
+    <body onload="getInsults()">
         <img style="max-width: 300px;" src="../assets/logoscaled.png">
-        <h1>InsultBot</h1>
-        <h2>Insult your friends with ease!</h2>
 
         <div id="main-div">
-            <p>This is the main paragraph text!</p>
+            <h1>InsultBot</h1>
+            <h2>Insult your friends with ease!</h2>
+            <p>
+                InsultBot is a discord bot that allows you to easily insult someone in a server.
+                Simply type '?insult [user here]', and they will be insulted!
+            </p>
+            <img src="screenshot.png">
+            <p>DISCLAIMER: THERE ARE INSULTS CONTAINING SWEAR WORDS. PLEASE DO NOT BE OFFENDED BY THESE INSULTS, NONE OF THEM ARE INTENDED TO BE TARGETED, AND THE BOT DOES NOT SEE THE CONTEXT FOR WHO IT IS INSULTING. NONE OF THE INSULTS CONTAIN RACISM, HOMOPHOBIA, OR ANY OTHER FORM OF HATE SPEECH</p>
+
+            <h2 id="insultCounter">unknown insults and counting!</h2>
+            <script>
+
+                function sleep(ms) {
+                    return new Promise(resolve => setTimeout(resolve, ms));
+                }
+
+                function getInsults(){
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", 'https://pr0x1mas.github.io/InsultBot/src/insults.csv', false);
+                    xmlhttp.send();
+                    if (xmlhttp.status==200) {
+                        result = xmlhttp.responseText;
+                        insultList = result.replaceAll("?1", "you").replaceAll("?2", "Pr0x1mas").split('\n')
+                    }
+                    document.getElementById('insultCounter').innerHTML = insultList.length + " insults and counting!"
+
+                    displayList = document.getElementById("insultList")
+
+                    insultList.forEach(element => {
+                        newInsult = document.createElement("li");
+                        newInsultText = document.createTextNode(element);
+                        newInsult.appendChild(newInsultText);
+                        displayList.appendChild(newInsult);
+                    })
+
+                    listContainer = document.getElementById("insultListContainer")
+                }
+
+
+
+                async function showInsults(){
+                    listContainer.style.maxHeight = "0px";
+                    listContainer.innerHTML = "<ul id='insultList'></ul>"
+                    displayList = document.getElementById("insultList")
+                    await sleep(500);
+                    insultList.forEach(element => {
+                        newInsult = document.createElement("li");
+                        newInsultText = document.createTextNode(element);
+                        newInsult.appendChild(newInsultText);
+                        displayList.appendChild(newInsult);
+                        console.log(element)
+                    })
+                    listContainer.style.maxHeight = "1000px";
+                    listContainer.style.borderStyle = "solid";
+                }
+
+                async function insultMe(){
+                    listContainer.style.borderStyle = "solid";
+                    listContainer.style.maxHeight = "0px";
+                    await sleep(500);
+                    listContainer.innerHTML = insultList[Math.floor(Math.random() * insultList.length)];
+                    listContainer.style.maxHeight = "1000px";
+                }
+            </script>
+            <p>
+                Whilst InsultBot already has a few insults, I'm not exactly the master of wit and repartee, so I need your help coming up with more insults.
+                <br><br>
+                With the '?submit' command, you can suggest your own insults for me to review and add to the bot! Bear in mind I get to decide what insults do and don't get added, its my bot, please don't be annoyed if the joke you think is the epitome of comedy does not get added. You will not be notified if your insult is or isn't added.
+                <br><br>
+                I would add an option to submit insults on this website, but github does not allow server side scripting and I'm not gonna buy my own domain and server.
+            </p>
+            <img src="submission.png">
+
+            <h2>See the insults, here and now</h2>
+            <p>Want to see just how destroyed by the bot you can get?</p>
+            <button onclick="showInsults()">Show the full list</button>
+            <button onclick="insultMe()">Insult me</button>
+            <br><br><br>
+
+            <div id="insultListContainer">
+                <ul id="insultList">
+                    
+                </ul>
+            </div>
+
+            <h2>Add it to your server</h2>
+            <p>Want to start insulting your friends? Add the bot to your server here!</p>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=834838493561225307&permissions=3072&scope=bot"><button>Add to your server</button></a>
+
+            <h2>Who made the bot?</h2>
+            <p>This bot and website are developed and maintained by <a href="https://pr0x1mas.github.io">Pr0x1mas</a>. You can find the code on <a href="https://github.com/Pr0x1mas/InsultBot">Github</a>.</p>
         </div>
     </body>
 </html>

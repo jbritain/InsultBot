@@ -10,7 +10,7 @@ except Exception:
 
 TOKEN = os.getenv("TOKEN")
 
-bot = commands.Bot(command_prefix='?', description='Insult your friends with InsultBot using the ?insult command!')
+bot = commands.Bot(command_prefix='?', description='Insult your friends with InsultBot, or suggest your own insults!')
 
 bot.load_extension("insultCommands")
 
