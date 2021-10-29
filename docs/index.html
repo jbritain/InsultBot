@@ -31,7 +31,7 @@
                     xmlhttp.send();
                     if (xmlhttp.status==200) {
                         result = xmlhttp.responseText;
-                        insultList = result.replaceAll("?1", "you").replaceAll("?2", "Pr0x1mas").split('\n')
+                        insultList = result.replaceAll("?1", "[victim]").replaceAll("?2", "[insulter]").split('\n')
                     }
                     document.getElementById('insultCounter').innerHTML = insultList.length + " insults and counting!"
 
