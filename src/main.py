@@ -5,6 +5,9 @@ from discord_slash.utils.manage_commands import create_option
 import urllib
 import random
 
+print('running bot in')
+print(os.getcwd())
+
 try:
     from dotenv import load_dotenv
     load_dotenv(dotenv_path = os.path.join(os.path.dirname(__file__), '.env'))
@@ -27,13 +30,13 @@ for line in data:
 
 @client.event
 async def on_ready():
-    print('running bot in')
-    print(os.getcwd())
+
     print('------')
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
+    await client.change_presence(activity=discord.Game(name="with your mother"))
     
 @slash.slash(
 name="Insult",
