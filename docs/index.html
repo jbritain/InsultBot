@@ -6,7 +6,7 @@
     </head>
 
     <body onload="getInsults()">
-        <img style="max-width: 300px;" src="https://raw.githack.com/Pr0x1mas/InsultBot/main/assets/logoscaled.png">
+        <img style="max-width: 300px;" src="https://rawcdn.githack.com/jbritain/InsultBot/5563f33cde178307d911c427f06b1d2b2e4d43c6/assets/logoscaled.png/">
 
         <div id="main-div">
             <h1>InsultBot</h1>
@@ -27,7 +27,7 @@
 
                 function getInsults(){
                     var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("GET", 'https://raw.githack.com/Pr0x1mas/InsultBot/main/src/insults.csv', false);
+                    xmlhttp.open("GET", 'https://raw.githack.com/jbritain/InsultBot/main/src/insults.csv', false);
                     xmlhttp.send();
                     if (xmlhttp.status==200) {
                         result = xmlhttp.responseText;
