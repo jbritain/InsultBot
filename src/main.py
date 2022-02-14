@@ -4,7 +4,7 @@ import discord
 from discord_slash.utils.manage_commands import create_option
 import urllib
 import random
-import csV
+import csv
 
 print('running bot in' + os.getcwd())
 try:
