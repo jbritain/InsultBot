@@ -4,9 +4,7 @@ import discord
 from discord_slash.utils.manage_commands import create_option
 import urllib
 import random
-import csv
-
-from sympy import true
+import csV
 
 print('running bot in' + os.getcwd())
 try:
