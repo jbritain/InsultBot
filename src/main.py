@@ -31,7 +31,7 @@ slash = SlashCommand(client, sync_commands=True) # Declares slash commands throu
 
 insults = []
 try:
-    data = urllib.request.urlopen("https://rawcdn.githack.com/jbritain/InsultBot/83934fdba76cc04e07543270b6f9ae6fb6125ec8/src/insults.csv") # get insults from online list
+    data = urllib.request.urlopen("https://raw.githack.com/jbritain/InsultBot/main/src/insults.csv") # get insults from online list
     for line in data:
         insults.append(line.decode("utf-8").replace("\"", ""))
         print(line.decode("utf-8").replace("\"", "")) # print all insults
